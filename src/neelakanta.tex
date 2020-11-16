@@ -1,0 +1,452 @@
+\documentclass[a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tcolorbox}
+\usepackage[pdfpagelabels]{hyperref}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{arcs}
+\usepackage{xwatermark}
+\usepackage{array}
+\hypersetup{pdftex}
+\pagecolor{white}
+\color{black}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=red,
+}
+
+\usepackage{etoolbox}
+
+\makeatletter
+\providecommand\@gobblethree[3]{}
+\patchcmd{\over@under@arc}
+ {\@gobbletwo}
+ {\@gobblethree}
+ {}{}
+\makeatother
+
+\graphicspath{ {figures/} }
+
+\newcommand{\mkfig}[5]{
+  \begin{figure}[#1]
+    \centering
+    \includegraphics[width=#3in]{/home/achyut/latex/#4}
+    \caption{\centering{#5}}
+    \label{fig.#2}
+  \end{figure}
+}
+
+\newcommand{\mksubfig}[5]{
+  \begin{subfigure}[#1]{#3\textwidth} 
+    \centering
+    \includegraphics[width=\textwidth]{/home/achyut/latex/#4}
+    \caption{\centering{#5}}
+    \label{fig.#2}
+  \end{subfigure}
+}
+
+\newtheorem{problem}{Problem}
+\newtheorem{example}{Example}
+\newtheorem{solution}{Solution}
+
+\renewcommand*{\proofname}{Sol}
+
+
+\title{Kepler's Laws}
+\author{Achyut Bharadwaj (\href{mailto:achyut.22068@gear.ac.in}{achyut.22068@gear.ac.in})\\ 
+  Daksh Anand (\href{mailto:daksh.22016@gear.ac.in}{daksh.22016@gear.ac.in})\\
+  Aryan GV (\href{mailto:aryan.22157@gear.ac.in}{aryan.22157@gear.ac.in})\\ 
+Medhajit Deb (\href{mailto:medhajit.22004@gear.ac.in}{medhajit.22004@gear.ac.in})}
+\date{\today}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\pagebreak
+\listoffigures
+\noindent
+
+\chapter{Some basic concepts needed for Kepler's laws}
+\section{Angular displacement and velocity}
+\subsection{Angular displacement}
+Just as displacement is defined as the change in position of an object, angular displacement is defined as
+the angle swept by an object travelling in a circular path.\\\\
+Let's look at an example. Say, an object travels from point $A$ to point $B$. In this process, say it 
+covers an angle of $\theta$ (See figure \ref{fig.4}).
+\mkfig{h!}{4}{2}{presentation.4.png}{An example} \\
+Here, arc \(\overarc{$AB$}\) is the tangential displacement and $\theta$ is the angular displacement.
+In this case, $$\text{\(\overarc{$AB$}\)}=r\theta,$$ where $r$ is the radius of the circular path.
+Hence, the relationship between angular displacement and tangential displacement is: $$s=r\theta,$$
+where $s$ is the tangential displacement and $\theta$ is the angular displacement.
+
+\subsection{Angular velocity}
+Just as tangential velocity is displacement per unit time, angular velocity is the angle swept per unit time.
+So, the average angular velocity can be written as: $$\omega_{avg}=\frac{\Delta \theta}{\Delta t},$$
+where $\omega$ is the angular velocity, $\theta$ the angle swept and $t$ the time taken. \\\\
+Now, as the change in time approaches 0, $\frac{\Delta \omega}{\Delta t}$ will be the instantaneous angular
+velocity. Angular velocity as change in time approaches 0(instantaneous angular velocity) can be 
+represented as: $$\omega=\frac{d\theta}{dt}.$$ Note that the $d$ before $\theta$ and $t$ is just a way to
+represent the angular velocity as the change in time approaches 0. In general, $d$ is put before a variable to 
+represent extremely small quantities.\\\\
+The relationship between angular velocity and tangential velocity is: $$v=r\omega,$$
+where $\omega$ is the angular velocity, $v$ is the tangential velocity and $r$ is the radius of the circular path.
+We can also write the relationship as: $$\omega=\frac{v}{r}.$$
+
+\section{Centripetal force}
+Centripetal force is the force that acts on a body travelling in a circular path, towards the center of the 
+circle. The numerical value of centripetal force is given by: $$F_c=\frac{mv^2}{r},$$
+where $F_c$ is the centripetal force, $m$ is the mass of the body, and $v$ is the tangential velocity of the 
+body.\\\\
+Now, let's say that a person is twirling a ball of mass $m$ attached to a light and inextensible string of length
+$r$.
+Let us draw all the actual forces acting on it(ignore gravity).
+\mkfig{h!}{5}{2}{presentation.5.png}{Forces acting on mass} \\\\
+The only apparent force that is present is the tension due to the string $(T)$(See figure \ref{fig.5}).
+But, we know that there is a centripetal force acting on any body going around in a circular path.
+So, we can conclude that in this case, the tension due to the string is the cause of the centripetal force.
+Hence, $T=F_c$.\\\\
+From this, we can generically conclude that the net external force acting on a body travelling in a circular 
+path, towards the center of the circular path is equal to the centripetal force. \\\\
+Now, let us apply this to something different: Gravity.
+
+\section{Orbital velocity} \label{sec.2}
+Let's start with a few problems.
+  \begin{tcolorbox}
+    \example{A person is twirling a ball of mass $m$ attached to a light, inextensible string of 
+    length $r$ in space. Given that the tension in the string is $T$ N, find the tangential velocity.}
+  \end{tcolorbox}
+    \proof{
+    We have already seen that the net external force acting towards the center of the circular path is equal to
+    the centripetal force. Hence, in this case: $$F_c=\frac{mv^2}{r}=T.$$
+  Hence, $$v=\sqrt{\frac{Tr}{m}}$$}
+    \begin{tcolorbox}
+      \example{A satellite of mass $m$ is revolving at a distance of $r$ from the center of a planet
+      of mass $M$. Find the satellite's tangential velocity.}
+    \end{tcolorbox}
+    \proof{
+    This problem is just like the previous one. The only difference is that instead of tension, there is a force
+    of Gravity acting on the satellite. Hence, $$F_c=\frac{mv^2}{r}=\frac{GMm}{r^2}.$$
+  So, $$v=\sqrt{\frac{GM}{r}}.$$}
+If you could do the second problem on your own, you have figured out what this section is all about!\\
+
+\section{Summary}
+\begin{itemize}
+  \item The relationship between angular velocity and tangential velocity is given by: 
+    $$\omega=\frac{v}{r},$$ where $\omega$ is the angular velocity, $v$ the tangential velocity and $r$ the
+    radius of the circular path.
+  \item Centripetal Force is given by: $$F_c=\frac{mv^2}{r},$$ where $F_c$ is the centripetal force, 
+    $m$ the mass of the object and $v$ the tangential velocity.
+  \item The Orbital velocity of a satellite of mass $m$at a distance $r$ from the center of a planet of mass
+    $M$ is given by: $$v_{\text{orbital}}=\sqrt{\frac{GM}{r}}.$$
+\end{itemize}
+
+
+
+\chapter{Kepler's Laws}
+\section{Kepler's first law}
+\subsection{Law statement}
+Kepler's first law states that all planets go around the Sun in an elliptical orbit, and that the Sun is 
+at one of the foci of the orbit.\\\\
+But, to understand this, we must first understand what an ellipse is.
+\subsection{Definition of Ellipse}
+Let us first plot two points on a graph, and call it $F_1$ and $F_2$. Now, find a point which is say, 
+a distance $r_1$ away from $F_1$, and a distance of $r_2$ away from $F_2$. Can you also find another point that
+is a distance $s_1$ away from $F_1$ and $s_2$ away from $F_2$, where $$r_1+r_2=s_1+s_2?$$
+Now, if you plot infinite points such that $$r_1+r_2=s_1+s_2=p_1+p_2\cdots,$$ where $r_1, s_1, p_1, \dots$ are the
+distances of the points from $F_1$ and $r_2,s_2,p_2,\dots$ are the distances from $F_2$, what will you get? 
+For the answer, see figure \ref{fig.1}.
+\mkfig{h!}{1}{2}{presentation.1.png}{An ellipse} \\\\
+You will get an ellipse! So, An ellipse is a plane curve surrounding two focal points, such that 
+for all points on the curve the sum of the distances to the focal points is constant, 
+just like how all the points in a circle is equidistant from its center.\\\\
+In fact both circle and ellipse are conic sections that is a curve obtained from the intersection of a 
+cone and a plane, along with parabola and hyperbola. \\\\
+Now, it's easier to understand what Kepler's first law means. There is a proof for Kepler's first law, but
+we are not going to prove it here.\\\\
+Let's move on to the second law.
+
+\section{Kepler's second law}
+\subsection{Law Statement}
+Kepler's second law states that a planet moving around the sun sweeps across equal areas in equal amounts of time.
+\mkfig{h!}{2}{2}{presentation.2.png}{Kepler's second law} \\
+
+\subsection{A relation between distance from planet and velocity}\label{sec.1}
+Let's examine this closely. Just like velocity is defined as the displacement per unit time, we can define 
+areal velocity as the area swept per unit time. We know that $$v_{\text{avg}}=\frac{\Delta s}{\Delta t},$$
+where $\Delta s$ is the change in displacement and $\Delta t$ is the change in time. \\\\
+So, we can say: 
+\begin{align} \label{eq.1}
+  \text{Areal velocity}_\text{avg} = \frac{\Delta A}{\Delta t},
+\end{align}
+where $A$ is the area.
+What happens when $\Delta t$ approaches $0$? As $\Delta t$ approaches 0, the right hand side of equation \ref{eq.1}
+becomes the instantaneous areal velocity instead of the average areal velocity. \\\\
+So, another way to represent equation \ref{eq.1} when $\Delta t$ approaches 0, is: 
+\begin{align} \label{eq.2}
+  v_A=\frac{dA}{dt},
+\end{align}
+where $v_A$ is the instantaneous areal velocity. Now, there is no need to get scared of this. It is just a way
+to represent the areal velocity as the change in time approaches 0. \\\\
+Now, let us take a small portion of the ellipse, where the angle made by the line segments($l_1,l_2$) 
+which extend till the periphery of the ellipse (see figure \ref{fig.3})is $d\theta$ (Note that the $d$ before the
+$\theta$ represents the fact that $d\theta$ is very small). \\
+\mkfig{h!}{3}{2}{presentation.3.png}{Section of ellipse} \\
+Since the angle is very small, the length of the $l_1,l_2$ are equal. Hence, we can treat the section of the 
+ellipse as the section of a circle with center $F_1$ and radius $r$, where 
+$$r=\text{ length of }l_1=\text{ length of }l_2.$$
+Now, what is the area of this section? Well, it is simply the area of the section of a circle with radius
+$r$ making an angle of $d\theta$. \\
+\\
+In general, how do we find the area of a section of a circle given that the radius is say, $s$, and the 
+angle it makes at the center is say, $\alpha^{\circ}$? \\\\
+The area will be: $$(\pi s^2)\times \frac{\alpha}{360}.$$
+But, now let us say that the angle is $\beta$ radians. Radians is the SI unit for angles. $2\pi$ radians is 
+equal to $360^{\circ}.$ Hence, if the angle is $\beta$ in radians, the area will be: 
+$$\frac{\beta}{2\pi}\pi s^2.$$
+\\
+We can apply this to the section of our ellipse, which we are treating as a section of a circle too. 
+We know that the radius is $r$, and angle $d\theta$. So, the area($dA$) of the section can be written as:
+\begin{align}\label{eq.3}
+  dA=\frac{d\theta}{2\pi}\pi r^2=r^2\frac{d\theta}{2}.
+\end{align}
+\\
+Plugging this into equation \ref{eq.2}, we get: 
+$$v_A=\frac{r^2\frac{d\theta}{2}}{dt}=\frac{r^2}{2}\frac{d\theta}{dt}.$$
+Since we know that $\omega=\frac{d\theta}{dt}$, we can rewrite the above as: $$v_A=\omega\frac{r^2}{2}.$$
+Since we know that $\omega=\frac{v}{r}$, we can rewrite the equation as:
+$$v_A=\frac{r^2}{2}\frac{v}{r}=\frac{vr}{2}.$$
+Since $v_A$ is constant, we can write:
+\begin{align*}
+  &\frac{vr}{2}=k\\
+  \Rightarrow &\boxed{vr=2k=c},
+\end{align*}
+where $k$ and $c$ are constants, and $c=2k.$
+Hence, $v$ is inversely proportional to $r$, where $r$ is the distance between the planet and the Sun.
+
+\section{Kepler's third law}
+\subsection{Law Statement}
+Kepler's third law states that the cube of the major axis of the orbit of a planet around the sun is directly 
+proportional to the square of time it takes to move around the sun. The law can be expressed as: 
+\begin{align*}
+  &T^2\propto a^3\\
+  \Rightarrow &T^2 = k\cdot a^3,
+\end{align*}
+Where $a =$ major axis of the planet's orbit around the sun, $T =$ time period of the planet (around the sun)
+and $k$ is a constant.\\
+\subsection{A little more about ellipses}
+Now, what is the major axis? It is the distance between the center of an ellipse and farthest point from the 
+center of the ellipse(See figure \ref{fig.6}).
+\mkfig{h!}{6}{2}{presentation.6.png}{Major axis of ellipse} \\
+In figure \ref{fig.6}, $a=\overline{OD}$ is the major axis. \\
+
+\subsection{Derivation for circular orbits}
+Let's now try to derive the law(for circular orbits only).
+First, what is time period mathematically, for circular orbits? Time period is the time an object takes to 
+complete a full circle. In other words, it is the time takes for the object to travel a 
+distance of $2\pi r$ units(Circumference of a circle).\\\\
+Now, consider a planet travelling at a tangential velocity $v$ in a circular path with radius $r$ around the Sun. 
+The time period will be the time taken to travel a distance of $2\pi r$. Hence, we can say: 
+\begin{align}\label{eq.4}
+T=\frac{2\pi r}{v}.
+\end{align}
+Since we know that the tangential velocity of an object in orbit at a distance $R$ from the center of a planet 
+of mass $M$ is 
+given by $$v_{\text{tangential}}=\sqrt{\frac{GM}{R}},$$
+we can substitute $$v=\sqrt{\frac{GM}{r}},$$
+where $M$ is the mass of the Sun, into equation \ref{eq.4}. Doing so, we get: 
+\begin{equation} \label{eq.5}
+  \begin{split}
+    T &= \frac{2\pi r}{\sqrt{\frac{GM}{r}}} \\
+    &= \frac{2\pi r\sqrt{r}}{\sqrt{GM}}\\
+    &= 2\pi\frac{r^3}{GM}
+  \end{split}
+\end{equation}
+Now, squaring both sides of equation \ref{eq.5}, we get: $$T^2=4\pi^2\frac{r^3}{GM}=\frac{4\pi^2}{GM}r^3.$$
+Since $\frac{4\pi^2}{GM}$ is a constant, we let $k=\frac{4\pi^2}{GM}$. Hence, 
+$$T^2=kr^3,$$ or $$\boxed{T^2\propto r^3}.$$
+
+
+
+\section{Summary}
+\begin{itemize}
+  \item Johannes Kepler was a 16th century astronomer who established three laws which govern the motion 
+    of planets (around the sun). These are known as Kepler’s law of planetary motion. The same laws also 
+    describe the motion of satellites (like the moon) around plants (like the earth).
+
+  \item Though Kepler gave the laws of planetary motion, he could not give a theory to explain the motion of  
+    planets. It was Newton who showed that the cause of the motion of planets is the gravitational force which 
+    the sun exerts on them. In fact, Newton used the Kepler’s third law of planetary motion to develop the law  
+    of universal gravitation.
+  \item[]
+    \paragraph*{Kepler’s first law}
+    The planets move in elliptical orbits around the sun, with the sun at one of the two 
+    foci of the elliptical orbit. 
+
+  \item[]
+    \paragraph*{Kepler’s second law} 
+    Each planet revolves around the sun in such a way that the line joining the planet to the sun sweeps over 
+    equal areas in equal intervals of time.
+
+  \item[]
+    \paragraph*{Kepler’s third law} 
+    The cube of the length of the major axis of the orbit of the planet around the sun is directly proportional to 
+    the square of time it takes to move around the sun (Time period). The law can be expressed as: 
+    $$T^2\propto a^3,$$ or $$T^2=k\cdot a^3,$$ where $k$ is a constant, $a =$ major axis of the orbit of the 
+    planet around the sun and $T = $time period of the planet 
+    (around the sun). 
+
+\end{itemize}
+
+
+
+\chapter{Problems}
+In this chapter, we are going to be exploring some problems based on what has been covered in this presentation.
+Note that all the problems have been framed and solved by at least one of the authors. Any problems that are not
+framed by the authors or any solutions that aren't written by the authors will have their sources cited.
+
+\section{Problems} \label{sec.4}
+Let us start with some problems. The solutions to the problems can be found in section \ref{sec.3}.\\\\
+For any clarifications based on the problems, contact one of the authors: 
+\begin{itemize}
+  \item Achyut Bharadwaj: \href{mailto:achyut.22068@gear.ac.in}{achyut.22068@gear.ac.in}
+  \item Daksh Anand: \href{mailto:daksh.22016@gear.ac.in}{daksh.22016@gear.ac.in}
+  \item Medhajit Deb: \href{mailto:medhajit.22004@gear.ac.in}{medhajit.22004@gear.ac.in}
+  \item Aryan GV: \href{mailto:aryan.22157@gear.ac.in}{aryan.22157@gear.ac.in}
+\end{itemize}
+
+\subsection{Based on Chapter 1}
+  \begin{tcolorbox}
+    \problem{Given that the mass of the Earth is $M$ and the mass of a satellite orbiting the 
+    Earth is $m$, find the tangential velocity of the satellite given that it is orbiting the Earth in a 
+  circular path at a distance of $r$ from the center of the Earth.}
+  \end{tcolorbox}
+  \begin{tcolorbox}
+    \problem{A geocentric satellite is orbiting the Earth in a circular path (A geocentric 
+    satellite is a satellite that is fixed over a certain position on the Earth). Given that the mass of the 
+    Earth is $M$ and the radius of the Earth is $R$, find:
+    \begin{enumerate}
+      \item[(a)] The tangential velocity of the satellite.
+      \item[(b)] The height (from the surface) at which the satellite orbits the Earth,
+    \end{enumerate}
+  }
+  \end{tcolorbox}
+  \begin{tcolorbox}
+    \problem{Given that the mass of the Earth is $M$, the radius of the Earth is $R$ and that the 
+    duration of a day is $86400$ seconds, find the tangential velocity of an object on the surface of the Earth 
+    at the equator.}
+  \end{tcolorbox}
+
+\subsection{Based on Chapter 2}
+\setcounter{problem}{0}
+  \begin{tcolorbox}
+    \problem{A satellite of mass $m$ is orbiting a planet of mass $M$ in an elliptical orbit such 
+    that it's velocity as a function of time between point $A$ and point $B$ (See figure \ref{fig.7})
+    is given by $$v(t)=t^2+23t+2.$$ Given that the distance between the planet and the satellite at point 
+    $A$ is $x$, and that $t=0$ when the satellite is at point $A$, find the distance between the planet and 
+  the satellite ($r$) as a function of time.}
+  \end{tcolorbox}
+  \mkfig{h}{7}{3}{presentation.7.png}{The satellite orbiting the planet}
+  \begin{tcolorbox}
+    \problem{A satellite takes $T_1$ seconds to orbit the Earth in a circular orbit at a distance 
+    $r_1$ from the center of the Earth. If another satellite is orbiting the Earth in a circular orbit at a 
+    distance $r_2$ from the center of the Earth, find the time period of the satellite orbiting at the height 
+  $r_2-R$, where $R$ is the radius of the Earth.}
+  \end{tcolorbox}
+  \begin{tcolorbox}
+    \problem{A satellite takes $T_1$ seconds to orbit the Earth in a circular orbit at a distance 
+    $r_1$ from the center of the Earth. If another satellite orbiting the Earth in a circular orbit takes $T_2$
+    seconds to come back to the same position with respect to the Earth, find the height at which it orbits 
+    assuming that the direction of revolution of both satellites are in the same direction as the rotation of 
+    the Earth.
+  (Take the duration of a day as $T$ seconds).}
+  \end{tcolorbox}
+
+\section{Solutions} \label{sec.3}
+Here are the solutions to the problems from section \ref{sec.4}.\\\\
+For any clarifications based on the solutions, contact one of the authors: 
+\begin{itemize}
+  \item Achyut Bharadwaj: \href{mailto:achyut.22068@gear.ac.in}{achyut.22068@gear.ac.in}
+  \item Daksh Anand: \href{mailto:daksh.22016@gear.ac.in}{daksh.22016@gear.ac.in}
+  \item Medhajit Deb: \href{mailto:medhajit.22004@gear.ac.in}{medhajit.22004@gear.ac.in}
+  \item Aryan GV: \href{mailto:aryan.22157@gear.ac.in}{aryan.22157@gear.ac.in}
+\end{itemize}
+
+\subsection{Solutions to Problems based on chapter 1}
+\begin{solution} \normalfont
+We have already seen that $$v_{\text{orbital}}=\sqrt{\frac{GM}{r}},$$ where 
+$v_{\text{orbital}}$ is the tangential velocity of orbital of a satellite around a planet, $M$ the mass of the 
+planet and $r$ the radius of the orbit (Refer to section \ref{sec.2}). \\\\
+Directly applying this to the problem, we get $$\boxed{v=\sqrt{\frac{GM}{r}}}.$$\\
+\end{solution}
+\begin{solution} \normalfont
+The time period of an object going in a circular path with a tangential velocity say $v$
+is given by: $$T=\frac{2\pi r}{v},$$ where $T$ is the time period, and $r$ the radius of the circular path.(Time
+period is distance covered divided by velocity, and the distance in a circular path is $2\pi r$).\\\\
+Now, let's come back to the problem.\\\\ 
+Let $v$ be the tangential velocity, $T$ be the time period of the Earth and $r$ by the distance between the 
+satellite and the center of the Earth.\\\\
+\subparagraph*{Part (a)} 
+The tangential velocity will be: 
+\begin{align}\label{eq.7}
+  {v=\sqrt{\frac{GM}{r}}}.
+\end{align}
+Applying the formula for time period, we get: 
+\begin{equation}\label{eq.8}
+  \begin{split}
+    &T=\frac{2\pi r}{v}\\
+    \Rightarrow & r=\frac{Tv}{2\pi}
+  \end{split}
+\end{equation}
+Substituting $v=\sqrt{\frac{GM}{r}}$ from equation \ref{eq.7} into equation \ref{eq.8}, we get: 
+\begin{equation}\label{eq.9}
+\begin{split}
+  &r=\frac{T\sqrt{\frac{GM}{r}}}{2\pi}\\
+  \Rightarrow &r\sqrt{r}=\sqrt{r^3}={T\frac{\sqrt{GM}}{2\pi}}\\
+  \Rightarrow & r=\sqrt[3]{\frac{T^2GM}{4\pi^2}}\\
+  \Rightarrow & r-R=\text{height from surface}=\boxed{\sqrt[3]{\frac{T^2GM}{4\pi^2}}-R}.
+\end{split}
+\end{equation}
+\\
+\subparagraph*{Part (b)} 
+Substituting the result we got for $r$ in equation \ref{eq.9}, into equation \ref{eq.7}, we get:
+$$v=\boxed{\sqrt{\frac{GM}{\sqrt[3]{\frac{T^2GM}{4\pi^2}}-R}}}$$
+\end{solution}
+
+\subsection{Solutions to Problems based on chapter 2}
+\setcounter{solution}{0}
+  \begin{solution} \normalfont
+    We have seen that the areal velocity of a satellite in an elliptical orbit is:
+    $$v_A=\frac{vr}{2},$$where $v_A$ is the areal velocity, $v$ the tangential velocity at a point and $r$ the
+    distance between the point and the planet(Refer to section \ref{sec.1}).\\\\
+    Letting areal velocity be $v_A$ and applying the concept to this problem, we get: 
+    \begin{align} \label{eq.6}
+      v_A=\frac{v(t)r(t)}{2}
+    \end{align}
+    But, what is $v_A$? How do we find it?\\\\
+    Since $v_A$ is constant by Kepler's third law, $v_A$ at $t=0$ will be the same as the $v_A$ in equation 
+    \ref{eq.6}.
+    We can easily find both $v(0)$ and $r(0)$. So, we can simply substitute $t=0$ in equation \ref{eq.6} to 
+    find the areal velocity. \\\\
+    Substituting $t=0$ in the function $v(t)$, we get: $$v(0)=0^2+23\times 0 +2 = 2.$$
+    We are also given that the distance between point $A$ and the planet is $x$(Refer to figure \ref{fig.7}) and 
+    that $t=0$ at point $A$. So, $r(0)=x.$ Hence, $$v_A=\frac{2x}{2}=x.$$\\
+    Substituting $v_A=x$ in equation \ref{eq.6}, we get: 
+    \begin{align*}
+      &x=\frac{v(t)r(t)}{2}\\
+      \Rightarrow &v(t)r(t)=2x\\
+      \Rightarrow &r(t)=\frac{2x}{v(t)}=\boxed{\frac{2x}{t^2+23t+2}}.
+    \end{align*}
+  \end{solution}
+\end{document}
